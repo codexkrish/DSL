@@ -20,34 +20,28 @@
       box-sizing: border-box;
       background-image: url('Bill tree banner.jpg');
       background-size: cover;
-      background-position: center; /* Changed to center the background image */
+      background-position: center;
       background-repeat: no-repeat;
       background-attachment: fixed;
     }
 
-    /* h1 { */
-      /* color: #4caf50; */
-      /* font-size: 2.5rem; */
-      /* margin-bottom: 2rem; */
-    /* } */
-
-    .earth-container {
-      position: absolute;
-      /* Centering the element precisely: */
-      top: 38%;
-      left: 67%;
-      transform: translate(-50%, -50%); /* Moves the element back by half its own width/height */
-      /* Base width and height will be set by JS dynamically */
-      margin: 2rem auto; /* Keeping margin, though transform might override visual effect */
-      border-radius: 50%;
-      overflow: hidden;
-      /* Add a nice border */
-      transition: width 1s ease-out, height 1s ease-out, box-shadow 0.5s ease-out; /* Smooth transitions for size and shadow */
+    h1 {
+      color: #4caf50;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
     }
 
-    /* Celebration effect for 100% */
+    .earth-container {
+      position: relative; /* Changed to relative for better centering */
+      margin: 2rem auto;
+      margin-left: 850px;
+      border-radius: 50%;
+      overflow: hidden;
+      transition: width 1s ease-out, height 1s ease-out, box-shadow 0.5s ease-out;
+    }
+
     .earth-container.celebrate {
-      box-shadow: 0 0 40px 10px rgba(118, 255, 3, 0.8), 0 0 60px 20px rgba(118, 255, 3, 0.5); /* Stronger, wider glow */
+      box-shadow: 0 0 40px 10px rgba(118, 255, 3, 0.8), 0 0 60px 20px rgba(118, 255, 3, 0.5);
       animation: pulse-glow 5s infinite alternate ease-in-out;
     }
 
@@ -75,367 +69,259 @@
       left: 0;
       width: 100%;
       height: 100%;
-      border-radius: 50%; /* Essential for circular masking of the overall effect */
-      overflow: hidden; /* Ensures mask is applied within circle */
+      border-radius: 50%;
+      overflow: hidden;
       mask-image: url(#wave-mask);
       -webkit-mask-image: url(#wave-mask);
     }
 
-    /* .counter { */
-      /* font-size: 1.8rem; */
-      /* margin-top: 1.5rem; */
-      /* font-weight: bold; */
-      /* color: #76ff03; */
-      /* background-color: rgba(0, 0, 0, 0.4); */
-      /* padding: 0.8rem 1.5rem; */
-      /* border-radius: 15px; */
-      /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
-      /* transition: font-size 0.5s ease-out, padding 0.5s ease-out; */
-    /* } */
+    .counter {
+      font-size: 1.8rem;
+      margin-top: 1.5rem;
+      margin-left: 700px;
+      font-weight: bold;
+      color: #76ff03;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 0.8rem 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      transition: font-size 0.5s ease-out, padding 0.5s ease-out;
+    }
 
-    /* .counter.celebrate-text { */
-        /* font-size: 2.2rem; */
-        /* padding: 1rem 2rem; */
-    /* } */
+    .counter.celebrate-text {
+      font-size: 2.2rem;
+      padding: 1rem 2rem;
+    }
 
-    /* .error { */
-      /* color: #ff5252; */
-      /* margin-top: 0.8rem; */
-      /* font-size: 1.1rem; */
-      /* background-color: rgba(0, 0, 0, 0.4); */
-      /* padding: 0.5rem 1rem; */
-      /* border-radius: 10px; */
-    /* } */
+    .error {
+      color: #ff5252;
+      margin-top: 0.8rem;
+      font-size: 1.1rem;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+    }
 
-    /* Styles for celebration particles */
     .particle-container {
-        position: fixed; /* Position over the whole viewport */
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none; /* Allows clicks to pass through */
-        z-index: 1000; /* Ensure it's on top of everything */
-        overflow: hidden; /* Prevent particles from causing scrollbars */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      overflow: hidden;
     }
 
     .particle {
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        background-color: white; /* Will be randomized */
-        border-radius: 50%; /* Default to circular, can be square */
-        opacity: 0;
-        animation: particle-burst 2s ease-out forwards;
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: white;
+      border-radius: 50%;
+      opacity: 0;
+      animation: particle-burst 2s ease-out forwards;
     }
 
     @keyframes particle-burst {
-        0% {
-            opacity: 1;
-            transform: translate(0, 0) scale(1);
-        }
-        100% {
-            opacity: 0;
-            transform: translate(var(--dx), var(--dy)) scale(0.5); /* Use CSS variables for random movement */
-        }
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(0.5);
+      }
     }
 
-    /* Responsive adjustments */
     @media (max-width: 600px) {
-      /* h1 { */
-        /* font-size: 1.8rem; */
-      /* } */
-      /* Earth container size will be managed by JS, so no fixed values here */
-      /* .counter { */
-        /* font-size: 1.5rem; */
-      /* } */
-      /* .counter.celebrate-text { */
-        /* font-size: 1.8rem; */
-        /* padding: 0.8rem 1.5rem; */
-      /* } */
+      h1 {
+        font-size: 1.8rem;
+      }
+      .counter {
+        font-size: 1.5rem;
+      }
+      .counter.celebrate-text {
+        font-size: 1.8rem;
+        padding: 0.8rem 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
-
-  <div class="earth-container">
+  <div class="earth-container" role="img" aria-label="Earth transitioning from lava to green based on customer progress">
     <div class="earth-rotator">
-      <!-- Green Earth as the base layer, always visible underneath -->
-      <img src="green1.jpg" class="earth-layer" alt="Green Earth" />
-
-      <!-- Lava Earth as the top layer that will be masked and disappear -->
+      <img src="green1.jpg" class="earth-layer" alt="Green Earth" onerror="this.src='https://via.placeholder.com/500x500?text=Green+Earth'" />
       <div class="lava-mask-container">
-        <img src="lava1.jpg" class="earth-layer" alt="Lava Earth" />
+        <img src="lava1.jpg" class="earth-layer" alt="Lava Earth" onerror="this.src='https://via.placeholder.com/500x500?text=Lava+Earth'" />
       </div>
     </div>
   </div>
+  <div class="counter" id="percentageDisplay" aria-live="polite">Loading...</div>
+  <div class="error" id="errorDisplay" aria-live="assertive"></div>
 
-  <!-- SVG for the wave mask -->
   <svg width="0" height="0">
     <defs>
-      <!-- maskUnits="objectBoundingBox" means coordinates are relative to the masked element (0-1) -->
-      <!-- The white area of the mask defines the visible area of the element it's applied to -->
       <mask id="wave-mask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
-        <path id="wavePath" fill="white">
-          <!-- The 'd' attribute will be dynamically set by JavaScript -->
-        </path>
+        <path id="wavePath" fill="white"></path>
       </mask>
     </defs>
   </svg>
 
-  <!-- <div class="counter" id="percentageDisplay">Loading...</div> -->
-  <!-- <div class="error" id="errorDisplay"></div> -->
-
   <script>
-    // Global variables for animation and data
-    const target = 700; // Set your customer target
-    // const percentageDisplay = document.getElementById('percentageDisplay'); // Commented out
-    // const errorDisplay = document.getElementById('errorDisplay'); // Commented out
-    const wavePath = document.getElementById('wavePath'); // The SVG path for the wave
-    const earthContainer = document.querySelector('.earth-container'); // The earth container element
-
-    // Earth sizing parameters
-    const baseEarthSize = 500; // px - initial size
-    const maxEarthSize = 700; // px - size at 100%
-    
-    // Celebration flag
+    const target = 700;
+    const percentageDisplay = document.getElementById('percentageDisplay');
+    const errorDisplay = document.getElementById('errorDisplay');
+    const wavePath = document.getElementById('wavePath');
+    const earthContainer = document.querySelector('.earth-container');
+    const baseEarthSize = 300; // Smaller base size for better mobile fit
+    const maxEarthSize = 500; // Smaller max size for responsiveness
     let is100PercentReached = false;
-    // Flag to control wave animation loop
-    let waveAnimationRunning = true; 
-    let animationFrameId; // To store the requestAnimationFrame ID
-
-    // Replace with your actual URL
+    let waveAnimationRunning = true;
+    let animationFrameId;
     const apiUrl = "https://script.google.com/macros/s/AKfycbzL4EhY5N7tv-Y8neC4oEdoEyzmaRTztPyO7Gezhr3XDwLrAGxBxwXZKkre3FkPNiLtYQ/exec";
+    let wavePhase = 0;
+    let currentPercentFromFetch = 0;
 
-    let wavePhase = 0; // Controls the ripple animation of the wave
-
-    /**
-     * Generates the SVG path data for a dynamic wave that hides the bottom portion.
-     * The white area of the mask will be the visible part of the lava layer.
-     * @param {number} percent The current greening percentage (0-100).
-     * @param {number} amplitude The height of the wave relative to the container (0-1).
-     * @param {number} frequency The number of wave cycles across the width.
-     * @param {number} phase The current phase for wave animation.
-     * @returns {string} The SVG path data string.
-     */
     function createWavePath(percent, amplitude, frequency, phase) {
-        // greenLevelNorm is the normalized height of the green fill from the bottom (0 to 1)
-        const greenLevelNorm = percent / 100;
-
-        // yWaveBase is the Y-coordinate of the wave's base, measured from the top (0)
-        // If greenLevelNorm is 0 (0% green), yWaveBase is 1 (wave at bottom)
-        // If greenLevelNorm is 1 (100% green), yWaveBase is 0 (wave at top)
-        const yWaveBase = 1 - greenLevelNorm;
-
-        let pathData = 'M0,0'; // Start at top-left of the bounding box (0,0)
-        pathData += 'L1,0'; // Draw line to top-right (1,0)
-
-        // If 100%, draw a flat line at the top, effectively fully hiding the lava
-        if (percent === 100) {
-            pathData += `L1,0 L0,0 Z`; // A very thin line at the top to fully mask
-        } else {
-            // Draw the wave from right to left to ensure the fill works correctly
-            // This path defines the visible part of the lava
-            const segments = 40; // Increased segments for smoother wave
-            for (let i = segments; i >= 0; i--) { 
-                const x = i / segments; // Normalized X coordinate (0 to 1)
-                // Calculate Y coordinate with wave effect, offset by phase
-                const y = yWaveBase + amplitude * Math.sin(x * Math.PI * 2 * frequency + phase);
-                pathData += `L${x},${y}`;
-            }
-            pathData += 'Z'; // Close the path back to the starting point (0,0)
+      const greenLevelNorm = percent / 100;
+      const yWaveBase = 1 - greenLevelNorm;
+      let pathData = 'M0,0 L1,0';
+      if (percent === 100) {
+        pathData += `L1,0 L0,0 Z`;
+      } else {
+        const segments = 40;
+        for (let i = segments; i >= 0; i--) {
+          const x = i / segments;
+          const y = yWaveBase + amplitude * Math.sin(x * Math.PI * 2 * frequency + phase);
+          pathData += `L${x},${y}`;
         }
-        return pathData;
+        pathData += 'Z';
+      }
+      return pathData;
     }
 
-    /**
-     * Updates the SVG wave mask's path data and animates the wave ripple.
-     * @param {number} currentPercent The current greening percentage.
-     */
     function updateWaveMask(currentPercent) {
-        // Adjusted amplitude and frequency for wider, more pronounced waves
-        const amplitude = 0.03; // Increased wave height
-        const frequency = 0.8;   // Decreased frequency for wider waves
-        
-        // Generate the new path data based on the current percentage and animation phase
-        const newPathData = createWavePath(currentPercent, amplitude, frequency, wavePhase);
-        wavePath.setAttribute('d', newPathData);
+      const amplitude = 0.03;
+      const frequency = 0.8;
+      const newPathData = createWavePath(currentPercent, amplitude, frequency, wavePhase);
+      wavePath.setAttribute('d', newPathData);
     }
 
-    /**
-     * Animation loop for the wave effect.
-     */
     function animateWave() {
-        if (!waveAnimationRunning) {
-          // If animation is stopped, just update the mask once for 100% flat
-          // and don't request next frame.
-          updateWaveMask(100); 
-          return;
-        }
-
-        wavePhase += 0.08; // Adjust speed of wave ripple animation
-        // Keep phase within 0 to 2*PI to prevent very large numbers and ensure continuity
-        if (wavePhase > Math.PI * 2) {
-          wavePhase -= Math.PI * 2;
-        }
-
-        // Use the global variable to get the current percentage
-        updateWaveMask(currentPercentFromFetch); 
-        animationFrameId = requestAnimationFrame(animateWave); // Loop the animation
+      if (!waveAnimationRunning) {
+        updateWaveMask(100);
+        return;
+      }
+      wavePhase += 0.08;
+      if (wavePhase > Math.PI * 2) {
+        wavePhase -= Math.PI * 2;
+      }
+      updateWaveMask(currentPercentFromFetch);
+      animationFrameId = requestAnimationFrame(animateWave);
     }
 
-    /**
-     * Triggers a burst of celebration particles from the Earth's center.
-     */
     function triggerCelebration() {
-        const particleContainer = document.createElement('div');
-        particleContainer.classList.add('particle-container');
-        document.body.appendChild(particleContainer);
+      const particleContainer = document.createElement('div');
+      particleContainer.classList.add('particle-container');
+      document.body.appendChild(particleContainer);
+      const earthRect = earthContainer.getBoundingClientRect();
+      const centerX = earthRect.left + earthRect.width / 2;
+      const centerY = earthRect.top + earthRect.height / 2;
+      const colors = ['#FFC107', '#E91E63', '#9C27B0', '#03A9F4', '#4CAF50', '#FF5722', '#F44336', '#673AB7'];
 
-        const earthRect = earthContainer.getBoundingClientRect();
-        const centerX = earthRect.left + earthRect.width / 2;
-        const centerY = earthRect.top + earthRect.height / 2;
-
-        const colors = ['#FFC107', '#E91E63', '#9C27B0', '#03A9F4', '#4CAF50', '#FF5722', '#F44336', '#673AB7']; // Bright colors
-
-        for (let i = 0; i < 70; i++) { // Generate more particles for a bigger burst
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            
-            // Randomize size and shape
-            const size = Math.random() * 10 + 5; // 5 to 15px
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            particle.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px'; // Half circles, half squares
-
-            // Position particles initially at the center of the Earth
-            particle.style.left = `${centerX}px`;
-            particle.style.top = `${centerY}px`;
-            
-            // Random movement direction and distance
-            const angle = Math.random() * Math.PI * 2; // Full circle
-            const distance = Math.random() * 180 + 70; // 70 to 250px distance
-            const dx = Math.cos(angle) * distance;
-            const dy = Math.sin(angle) * distance;
-            
-            particle.style.setProperty('--dx', `${dx}px`);
-            particle.style.setProperty('--dy', `${dy}px`);
-
-            // Randomize animation duration slightly
-            particle.style.animationDuration = `${Math.random() * 1 + 1.5}s`; // 1.5s to 2.5s
-            particle.style.animationDelay = `${Math.random() * 0.4}s`; // Stagger animation start
-
-            particleContainer.appendChild(particle);
-
-            // Remove particle after animation to clean up DOM
-            particle.addEventListener('animationend', () => {
-                particle.remove();
-                if (particleContainer.children.length === 0) {
-                    particleContainer.remove(); // Remove container if empty
-                }
-            });
-        }
+      for (let i = 0; i < 50; i++) { // Reduced for performance
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        const size = Math.random() * 10 + 5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        particle.style.left = `${centerX}px`;
+        particle.style.top = `${centerY}px`;
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 150 + 50;
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
+        particle.style.setProperty('--dx', `${dx}px`);
+        particle.style.setProperty('--dy', `${dy}px`);
+        particle.style.animationDuration = `${Math.random() * 1 + 1.5}s`;
+        particle.style.animationDelay = `${Math.random() * 0.4}s`;
+        particleContainer.appendChild(particle);
+        particle.addEventListener('animationend', () => {
+          particle.remove();
+          if (particleContainer.children.length === 0) {
+            particleContainer.remove();
+          }
+        });
+      }
     }
 
-    let currentPercentFromFetch = 0; // New global variable to store the last fetched percentage
-
-    /**
-     * Fetches customer count from the API and updates the display.
-     */
     async function fetchCustomerCount() {
       try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl, { cache: 'no-store' });
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+        const count = data.count || 0;
+        const percent = Math.min((count / target) * 100, 100);
+        currentPercentFromFetch = percent;
 
-        const count = data.count;
-        const percent = Math.min((count / target) * 100, 100); // Cap at 100%
-        currentPercentFromFetch = percent; // Store the fetched percentage
-
-        // 1. Update Earth Container Size
+        // Update Earth size
         const newSize = baseEarthSize + (maxEarthSize - baseEarthSize) * (percent / 100);
         earthContainer.style.width = `${newSize}px`;
         earthContainer.style.height = `${newSize}px`;
 
-        // 2. Celebration Logic & Wave Control
+        // Update display
+        percentageDisplay.textContent = percent === 100 ? "🥳 EARTH HEALED! 🎉" : `${count} Customers — ${Math.round(percent)}% Green`;
+
+        // Celebration logic
         if (percent === 100) {
-            if (!is100PercentReached) {
-                is100PercentReached = true;
-                earthContainer.classList.add('celebrate');
-                // percentageDisplay.classList.add('celebrate-text'); // Commented out
-                // percentageDisplay.textContent = "🥳 EARTH HEALED! 🎉"; // Commented out
-                triggerCelebration(); // Trigger particle effect
-
-                // Stop wave animation
-                if (waveAnimationRunning) {
-                  cancelAnimationFrame(animationFrameId);
-                  waveAnimationRunning = false;
-                  updateWaveMask(100); // Ensure mask is flat at 100%
-                }
-
-                // Brief delay before reverting to normal message
-                // setTimeout(() => {
-                //     percentageDisplay.textContent = `${count} Customers — ${Math.round(percent)}% Green`;
-                //     percentageDisplay.classList.remove('celebrate-text');
-                // }, 3000); 
-
-            }
+          if (!is100PercentReached) {
+            is100PercentReached = true;
+            earthContainer.classList.add('celebrate');
+            percentageDisplay.classList.add('celebrate-text');
+            triggerCelebration();
+            waveAnimationRunning = false;
+            cancelAnimationFrame(animationFrameId);
+            updateWaveMask(100);
+          }
         } else {
-            if (is100PercentReached) { // Reset if it was 100% but now it's less
-                is100PercentReached = false;
-                earthContainer.classList.remove('celebrate');
-                // percentageDisplay.classList.remove('celebrate-text'); // Commented out
-            }
-            // percentageDisplay.textContent = `${count} Customers — ${Math.round(percent)}% Green`; // Commented out
-
-            // Restart wave animation if it was stopped and not at 100%
+          if (is100PercentReached) {
+            is100PercentReached = false;
+            earthContainer.classList.remove('celebrate');
+            percentageDisplay.classList.remove('celebrate-text');
             if (!waveAnimationRunning) {
-                waveAnimationRunning = true;
-                animateWave(); // Restart the animation loop
+              waveAnimationRunning = true;
+              animateWave();
             }
-            updateWaveMask(percent); // Ensure mask is updated
+          }
+          updateWaveMask(percent);
         }
 
-        // errorDisplay.textContent = ''; // Commented out
-        
-        // Ensure mask is updated when percentage changes, even if animation is off
-        if (percent !== 100 || !waveAnimationRunning) {
-             updateWaveMask(percent);
-        }
-
+        errorDisplay.textContent = '';
       } catch (err) {
         console.error("Error fetching customer data:", err);
-        // errorDisplay.textContent = "⚠ Error loading customer data. Please try again later."; // Commented out
-        // percentageDisplay.textContent = "Data Unavailable"; // Commented out
-        // Ensure celebration classes are removed on error
+        errorDisplay.textContent = "⚠ Error loading data. Retrying...";
+        percentageDisplay.textContent = "Data Unavailable";
         earthContainer.classList.remove('celebrate');
-        // percentageDisplay.classList.remove('celebrate-text'); // Commented out
+        percentageDisplay.classList.remove('celebrate-text');
         is100PercentReached = false;
-        // Also ensure wave animation is running or reset on error
         if (!waveAnimationRunning) {
-            waveAnimationRunning = true;
-            animateWave();
+          waveAnimationRunning = true;
+          animateWave();
         }
       }
     }
 
-    // Initial fetch when the page loads
-    fetchCustomerCount();
-
-    // Set interval for real-time updates (e.g., every 5 seconds)
-    setInterval(fetchCustomerCount, 5000);
-
-    // Start the wave animation loop
-    animateWave();
-
-    // Set initial size of the earth container
+    // Initial setup
     earthContainer.style.width = `${baseEarthSize}px`;
     earthContainer.style.height = `${baseEarthSize}px`;
-
+    fetchCustomerCount();
+    setInterval(fetchCustomerCount, 5000);
+    animateWave();
   </script>
-
 </body>
 </html>
