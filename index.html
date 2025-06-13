@@ -24,27 +24,17 @@
       background-repeat: no-repeat;
       background-attachment: fixed;
     }
-
-    h1 {
-      color: #4caf50;
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-    }
-
     .earth-container {
       position: relative; /* Changed to relative for better centering */
-      margin: 2rem auto;
-      margin-left: 850px;
+      margin-left: 500px;
       border-radius: 50%;
       overflow: hidden;
       transition: width 1s ease-out, height 1s ease-out, box-shadow 0.5s ease-out;
     }
-
     .earth-container.celebrate {
       box-shadow: 0 0 40px 10px rgba(118, 255, 3, 0.8), 0 0 60px 20px rgba(118, 255, 3, 0.5);
       animation: pulse-glow 5s infinite alternate ease-in-out;
     }
-
     @keyframes pulse-glow {
       from {
         box-shadow: 0 0 40px 10px rgba(118, 255, 3, 0.8), 0 0 60px 20px rgba(118, 255, 3, 0.5);
@@ -53,7 +43,6 @@
         box-shadow: 0 0 50px 15px rgba(118, 255, 3, 1), 0 0 80px 30px rgba(118, 255, 3, 0.7);
       }
     }
-
     .earth-layer {
       position: absolute;
       top: 0;
@@ -62,7 +51,6 @@
       height: 100%;
       object-fit: cover;
     }
-
     .lava-mask-container {
       position: absolute;
       top: 0;
@@ -74,25 +62,23 @@
       mask-image: url(#wave-mask);
       -webkit-mask-image: url(#wave-mask);
     }
-
     .counter {
-      font-size: 1.8rem;
-      margin-top: 1.5rem;
-      margin-left: 700px;
+    font-size: 1.3rem;
       font-weight: bold;
       color: #76ff03;
       background-color: rgba(0, 0, 0, 0.4);
-      padding: 0.8rem 1.5rem;
+      padding: 0.8rem 0.8rem;
+       margin-left: 450px;
       border-radius: 15px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      transition: font-size 0.5s ease-out, padding 0.5s ease-out;
+      transition: font-size 0.3s ease-out, padding 0.3s ease-out;
     }
+
 
     .counter.celebrate-text {
       font-size: 2.2rem;
       padding: 1rem 2rem;
     }
-
     .error {
       color: #ff5252;
       margin-top: 0.8rem;
@@ -101,7 +87,6 @@
       padding: 0.5rem 1rem;
       border-radius: 10px;
     }
-
     .particle-container {
       position: fixed;
       top: 0;
@@ -112,7 +97,6 @@
       z-index: 1000;
       overflow: hidden;
     }
-
     .particle {
       position: absolute;
       width: 10px;
@@ -122,7 +106,6 @@
       opacity: 0;
       animation: particle-burst 2s ease-out forwards;
     }
-
     @keyframes particle-burst {
       0% {
         opacity: 1;
@@ -133,7 +116,6 @@
         transform: translate(var(--dx), var(--dy)) scale(0.5);
       }
     }
-
     @media (max-width: 600px) {
       h1 {
         font-size: 1.8rem;
@@ -157,9 +139,11 @@
       </div>
     </div>
   </div>
-  <div class="counter" id="percentageDisplay" aria-live="polite">Loading...</div>
+   <div class="counter">
+    <p>Thanks for participating</p>
+   <div id="percentageDisplay" aria-live="polite">Loading...</div>
   <div class="error" id="errorDisplay" aria-live="assertive"></div>
-
+  </div>
   <svg width="0" height="0">
     <defs>
       <mask id="wave-mask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
@@ -167,22 +151,20 @@
       </mask>
     </defs>
   </svg>
-
   <script>
     const target = 700;
     const percentageDisplay = document.getElementById('percentageDisplay');
     const errorDisplay = document.getElementById('errorDisplay');
     const wavePath = document.getElementById('wavePath');
     const earthContainer = document.querySelector('.earth-container');
-    const baseEarthSize = 300; // Smaller base size for better mobile fit
-    const maxEarthSize = 500; // Smaller max size for responsiveness
+    const baseEarthSize = 470; // Smaller base size for better mobile fit
+    const maxEarthSize = 570; // Smaller max size for responsiveness
     let is100PercentReached = false;
     let waveAnimationRunning = true;
     let animationFrameId;
     const apiUrl = "https://script.google.com/macros/s/AKfycbzL4EhY5N7tv-Y8neC4oEdoEyzmaRTztPyO7Gezhr3XDwLrAGxBxwXZKkre3FkPNiLtYQ/exec";
     let wavePhase = 0;
     let currentPercentFromFetch = 0;
-
     function createWavePath(percent, amplitude, frequency, phase) {
       const greenLevelNorm = percent / 100;
       const yWaveBase = 1 - greenLevelNorm;
@@ -200,14 +182,12 @@
       }
       return pathData;
     }
-
     function updateWaveMask(currentPercent) {
       const amplitude = 0.03;
       const frequency = 0.8;
       const newPathData = createWavePath(currentPercent, amplitude, frequency, wavePhase);
       wavePath.setAttribute('d', newPathData);
     }
-
     function animateWave() {
       if (!waveAnimationRunning) {
         updateWaveMask(100);
@@ -220,7 +200,6 @@
       updateWaveMask(currentPercentFromFetch);
       animationFrameId = requestAnimationFrame(animateWave);
     }
-
     function triggerCelebration() {
       const particleContainer = document.createElement('div');
       particleContainer.classList.add('particle-container');
@@ -229,7 +208,6 @@
       const centerX = earthRect.left + earthRect.width / 2;
       const centerY = earthRect.top + earthRect.height / 2;
       const colors = ['#FFC107', '#E91E63', '#9C27B0', '#03A9F4', '#4CAF50', '#FF5722', '#F44336', '#673AB7'];
-
       for (let i = 0; i < 50; i++) { // Reduced for performance
         const particle = document.createElement('div');
         particle.classList.add('particle');
@@ -257,7 +235,6 @@
         });
       }
     }
-
     async function fetchCustomerCount() {
       try {
         const response = await fetch(apiUrl, { cache: 'no-store' });
@@ -268,15 +245,12 @@
         const count = data.count || 0;
         const percent = Math.min((count / target) * 100, 100);
         currentPercentFromFetch = percent;
-
         // Update Earth size
         const newSize = baseEarthSize + (maxEarthSize - baseEarthSize) * (percent / 100);
         earthContainer.style.width = `${newSize}px`;
         earthContainer.style.height = `${newSize}px`;
-
         // Update display
         percentageDisplay.textContent = percent === 100 ? "🥳 EARTH HEALED! 🎉" : `${count} Customers — ${Math.round(percent)}% Green`;
-
         // Celebration logic
         if (percent === 100) {
           if (!is100PercentReached) {
@@ -300,7 +274,6 @@
           }
           updateWaveMask(percent);
         }
-
         errorDisplay.textContent = '';
       } catch (err) {
         console.error("Error fetching customer data:", err);
@@ -315,7 +288,6 @@
         }
       }
     }
-
     // Initial setup
     earthContainer.style.width = `${baseEarthSize}px`;
     earthContainer.style.height = `${baseEarthSize}px`;
